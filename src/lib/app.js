@@ -9767,7 +9767,7 @@
 	  /* script */
 	  __webpack_require__(9),
 	  /* template */
-	  __webpack_require__(10),
+	  __webpack_require__(15),
 	  /* styles */
 	  injectStyle,
 	  /* scopeId */
@@ -9775,7 +9775,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\app.vue"
+	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10281,7 +10281,7 @@
 	    value: true
 	});
 
-	var _waterfall = __webpack_require__(11);
+	var _waterfall = __webpack_require__(10);
 
 	var _waterfall2 = _interopRequireDefault(_waterfall);
 
@@ -10290,7 +10290,17 @@
 	exports.default = {
 	    data: function data() {
 	        return {
-	            items: [1, 2, 3, 4, 5]
+	            items: [{
+	                name: 'hah'
+	            }, {
+	                name: 'test2'
+	            }, {
+	                name: 'test3'
+	            }, {
+	                name: 'test4'
+	            }, {
+	                name: 'test5'
+	            }]
 	        };
 	    },
 
@@ -10303,37 +10313,16 @@
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    staticClass: "app"
-	  }, [_c('WaterFall', _vm._l((_vm.items), function(item) {
-	    return (_vm.items) ? _c('div', {
-	      staticClass: "item"
-	    }, [_vm._v("\n            " + _vm._s(item) + "\n        ")]) : _vm._e()
-	  }))], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-449cab76", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	var disposed = false
 	function injectStyle (ssrContext) {
 	  if (disposed) return
-	  __webpack_require__(12)
+	  __webpack_require__(11)
 	}
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  __webpack_require__(14),
+	  __webpack_require__(13),
 	  /* template */
-	  __webpack_require__(15),
+	  __webpack_require__(14),
 	  /* styles */
 	  injectStyle,
 	  /* scopeId */
@@ -10341,7 +10330,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\waterfall.vue"
+	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/waterfall.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] waterfall.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10365,13 +10354,13 @@
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(13);
+	var content = __webpack_require__(12);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	if(content.locals) module.exports = content.locals;
 	// add the styles to the DOM
@@ -10391,7 +10380,7 @@
 	}
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)(undefined);
@@ -10399,13 +10388,13 @@
 
 
 	// module
-	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n}\n#waterfall .loading[data-v-cdf86094] {\n}\n", ""]);
+	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    position: relative;\n}\n", ""]);
 
 	// exports
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -10414,19 +10403,81 @@
 	    value: true
 	});
 	exports.default = {
+	    props: {
+	        MINColumn: {
+	            type: Number,
+	            default: 2,
+	            validator: function validator(value) {
+	                return value >= 2;
+	            }
+	        },
+	        GapWidth: {
+	            type: Number,
+	            default: 5,
+	            validator: function validator(value) {
+	                return value >= 0;
+	            }
+	        },
+	        colWidth: {
+	            type: Number,
+	            default: 100,
+	            validator: function validator(value) {
+	                return value >= 0;
+	            }
+	        },
+	        dataList: {
+	            type: Array,
+	            default: function _default() {
+	                return [];
+	            }
+	        }
+	    },
 	    data: function data() {
-	        return {};
+	        return {
+	            columnTop: [],
+	            colContainer: null
+	        };
 	    },
 	    created: function created() {
 	        console.log('water created');
 	    },
 	    mounted: function mounted() {
 	        console.log('water mounted');
+	        this.init();
+	    },
+
+	    methods: {
+	        init: function init() {
+	            this.colContainer = document.querySelector('#waterfall');
+	            var colAmount = this.getColAmount();
+	            this.markColumnTop(colAmount);
+	        },
+	        getColAmount: function getColAmount() {
+	            var body = document.body;
+	            var bodyWidth = body.offsetWidth;
+	            var GapWidth = this.GapWidth;
+	            var colWidth = this.colWidth;
+
+	            console.log(Math.max(this.MINColumn, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth))));
+	            return Math.max(this.MINColumn, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
+	        },
+	        markColumnTop: function markColumnTop(colAmount) {
+
+	            //set a array for every column to mark the top, so we can know which column's height is smallest
+	            for (var i = 0; i < colAmount; i++) {
+
+	                this.columnTop.push(0);
+	            }
+
+	            //init the comtainer width
+	            var colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
+	            this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px';
+	        }
 	    }
 	};
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10434,15 +10485,46 @@
 	    attrs: {
 	      "id": "waterfall"
 	    }
-	  }, [_vm._t("default", [_c('div', {
-	    staticClass: "loading"
-	  }, [_vm._v("\n            loading...\n        ")])])], 2)
+	  }, _vm._l((_vm.dataList), function(item, index) {
+	    return _c('div', {
+	      key: index,
+	      staticClass: "waterfal-unit",
+	      attrs: {
+	        "index": index
+	      }
+	    }, [_vm._t("solt-item-{{$index}}", [_vm._v("\n            " + _vm._s(item) + "\n            "), _c('div', {
+	      staticClass: "loading"
+	    }, [_vm._v("\n                loading...\n            ")])], {
+	      slot: item
+	    })], 2)
+	  }))
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-cdf86094", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "app"
+	  }, [_c('WaterFall', {
+	    attrs: {
+	      "dataList": _vm.items
+	    }
+	  }, [_c('div')])], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-449cab76", module.exports)
 	  }
 	}
 

@@ -4,7 +4,17 @@
     export default {
         data() {
             return {
-                items: [1,2,3,4,5]
+                items: [{
+                    name: 'hah'
+                },{
+                    name: 'test2'
+                },{
+                    name: 'test3'
+                },{
+                    name: 'test4'
+                },{
+                    name: 'test5'
+                }]
             }
         },
         components: {
@@ -15,9 +25,12 @@
 
 <template>
     <div class="app">
-        <WaterFall>
-            <div v-for="item in items" class="item" v-if="items">
-                {{ item }}
+        <!--堆糖网数据格式 https://www.duitang.com/napi/index/hot/?start=0&include_fields=sender%2Calbum&limit=24&_=1498375527639-->
+        <WaterFall 
+            :dataList="items"
+        >
+            <div>
+                <!--{{ item.name }}-->
             </div>
         </WaterFall>
     </div>
