@@ -1,24 +1,31 @@
 <script>
     import WaterFall from './waterfall.vue';
+    import item from './item.vue';
 
     export default {
         data() {
             return {
-                items: [{
-                    name: 'hah'
-                },{
-                    name: 'test2'
-                },{
-                    name: 'test3'
-                },{
-                    name: 'test4'
-                },{
-                    name: 'test5'
-                }]
+                items: [
+                    {
+                        name: 'hah'
+                    },
+                    {
+                        name: 'test2'
+                    },
+                    {
+                        name: 'test3'
+                    },
+                    {
+                        name: 'test4'
+                    },
+                    {
+                        name: 'test5'
+                    }
+                ]
             }
         },
         components: {
-            WaterFall
+            WaterFall, item
         }
     }
 </script>
@@ -28,11 +35,8 @@
         <!--堆糖网数据格式 https://www.duitang.com/napi/index/hot/?start=0&include_fields=sender%2Calbum&limit=24&_=1498375527639-->
         <WaterFall 
             :dataList="items"
-        >
-            <div>
-                <!--{{ item.name }}-->
-            </div>
-        </WaterFall>
+            :item-component="$options.components.item"
+        />
     </div>
 </template>
 

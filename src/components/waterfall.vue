@@ -1,4 +1,6 @@
 <script>
+    import Util from './util.js';
+
     export default {
         props: {
             MINColumn: {
@@ -9,6 +11,13 @@
                 }
             },
             GapWidth: {
+                type: Number,
+                default: 5,
+                validator: function(value){
+                    return value >= 0;
+                }
+            },
+            GapHeight: {
                 type: Number,
                 default: 5,
                 validator: function(value){
@@ -27,6 +36,9 @@
                 default: function(){
                     return []
                 }
+            },
+            itemComponent: {
+                required: true
             }
         },
         data() {
@@ -47,6 +59,7 @@
                 this.colContainer = document.querySelector('#waterfall');
                 var colAmount = this.getColAmount();
                 this.markColumnTop(colAmount);
+                this.manageCell();
             },
             getColAmount(){
                 let body = document.body;
@@ -75,6 +88,37 @@
                 //init the comtainer width
                 let colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
                 this.colContainer.style.cssText = `width: ${colContainerWidth}px`;
+            },
+            manageCell(){
+
+                var minColHeight = Util.getMinVal(this.columnTop);
+                console.log(minColHeight);
+                this.adjustCells(this.colContainer.children);
+            },
+            adjustCells(units){
+                var columnTop = this.columnTop
+
+                Array.prototype.slice.call(units).forEach((unit, i) => {
+
+                    let colInfo = Util.getMinVal(columnTop),
+                        colMinIndex = colInfo.index,
+                        colMinHeight = colInfo.minHeight;
+                    
+                    let height = unit.offsetHeight,
+                        left = colMinIndex * (this.colWidth + this.GapWidth),
+                        top = colMinHeight;
+
+                    unit.style.cssText = `width: ${this.colWidth}px;
+                                          height: ${height}px;
+                                          left: ${left}px;
+                                          top: ${top}px`;
+
+                    columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
+                    console.log(columnTop);
+                });
+
+                var maxHeightVal = Util.getMaxVal(columnTop).maxHeight;
+                this.colContainer.style.cssText = `height: ${maxHeightVal}px`;
             }
         }
     }
@@ -82,13 +126,8 @@
 
 <template>
     <div id="waterfall">
-        <div class="waterfal-unit" v-for="(item, index) in dataList" :key="index" :index="index">
-            <slot name="solt-item-{{$index}}" :slot="item">
-                {{ item }}
-                <div class="loading">
-                    loading...
-                </div>
-            </slot>
+        <div class="waterfall-unit" v-for="(item, index) in dataList" :key="index" :index="index">
+            <Component :is="itemComponent" :item="item" :index="index" />
         </div>
     </div>
 </template>
@@ -96,5 +135,9 @@
 <style scoped>
     #waterfall {
         position: relative;
+    }
+    .waterfall-unit {
+        position: relative;
+        float: left;
     }
 </style>
