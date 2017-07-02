@@ -7,19 +7,24 @@
             return {
                 items: [
                     {
-                        name: 'hah'
+                        name: 'hah',
+                        imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg'
                     },
                     {
-                        name: 'test2'
+                        name: 'test2',
+                        imgURL: 'http://im5.tongbu.com/tbnews/201604/5ba60557-2.gif?w=500,281&b=559'                        
                     },
                     {
-                        name: 'test3'
+                        name: 'test3',
+                        imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg'                        
                     },
                     {
-                        name: 'test4'
+                        name: 'test4',
+                        imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg'                        
                     },
                     {
-                        name: 'test5'
+                        name: 'test5',
+                        imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg'                        
                     }
                 ]
             }

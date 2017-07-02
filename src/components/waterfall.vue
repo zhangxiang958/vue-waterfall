@@ -109,7 +109,7 @@
                         top = colMinHeight;
 
                     unit.style.cssText = `width: ${this.colWidth}px;
-                                          height: ${height}px;
+                                        
                                           left: ${left}px;
                                           top: ${top}px`;
 
@@ -137,7 +137,6 @@
         position: relative;
     }
     .waterfall-unit {
-        position: relative;
-        float: left;
+        position: absolute;
     }
 </style>

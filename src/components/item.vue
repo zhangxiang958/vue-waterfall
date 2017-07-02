@@ -17,13 +17,18 @@ export default {
 
 <template>
   <div>
+    <div>
+      <img :src="item.imgURL" />
+    </div>
     {{ item.name }}
     {{ index }}
   </div>
 </template>
 
 <style>
-
+  img {
+    width: 100%;
+  }
 </style>
 
 
