@@ -10425,41 +10425,41 @@
 
 	exports.default = {
 	    props: {
-	        MINColumn: {
+	        MIN_COLUMN: {
 	            type: Number,
 	            default: 2,
 	            validator: function validator(value) {
 	                return value >= 2;
 	            }
 	        },
-	        GapWidth: {
+	        GAP_WIDTH: {
 	            type: Number,
 	            default: 5,
 	            validator: function validator(value) {
 	                return value >= 0;
 	            }
 	        },
-	        GapHeight: {
+	        GAP_HEIGHT: {
 	            type: Number,
 	            default: 15,
 	            validator: function validator(value) {
 	                return value >= 0;
 	            }
 	        },
-	        colWidth: {
+	        COLWIDTH: {
 	            type: Number,
 	            default: 180,
 	            validator: function validator(value) {
 	                return value >= 0;
 	            }
 	        },
-	        dataList: {
+	        DATALIST: {
 	            type: Array,
 	            default: function _default() {
 	                return [];
 	            }
 	        },
-	        itemComponent: {
+	        ItemComponent: {
 	            required: true
 	        }
 	    },
@@ -10488,11 +10488,11 @@
 	            var body = document.body;
 	            var bodyWidth = body.offsetWidth;
 	            console.log(bodyWidth);
-	            var GapWidth = this.GapWidth;
-	            var colWidth = this.colWidth;
+	            var GapWidth = this.GAP_WIDTH;
+	            var colWidth = this.COLWIDTH;
 
-	            console.log(Math.max(this.MINColumn, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth))));
-	            return Math.max(this.MINColumn, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
+	            console.log(Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth))));
+	            return Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
 	        },
 	        markColumnTop: function markColumnTop(colAmount) {
 
@@ -10503,7 +10503,7 @@
 	            }
 
 	            //init the comtainer width
-	            var colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
+	            var colContainerWidth = colAmount * (this.COLWIDTH + this.GAP_WIDTH) - this.GAP_WIDTH;
 	            this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px;';
 	        },
 	        manageCell: function manageCell() {
@@ -10524,10 +10524,10 @@
 	                    colMinHeight = colInfo.minHeight;
 
 	                var height = unit.offsetHeight,
-	                    left = colMinIndex * (_this.colWidth + _this.GapWidth),
+	                    left = colMinIndex * (_this.COLWIDTH + _this.GAP_WIDTH),
 	                    top = colMinHeight;
 
-	                unit.style.cssText = 'width: ' + _this.colWidth + 'px;\n                                      left: ' + left + 'px;\n                                      top: ' + top + 'px';
+	                unit.style.cssText = 'width: ' + _this.COLWIDTH + 'px;\n                                      left: ' + left + 'px;\n                                      top: ' + top + 'px';
 
 	                columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
 	                console.log(columnTop);
@@ -11915,20 +11915,17 @@
 	    attrs: {
 	      "id": "waterfall"
 	    }
-	  }, _vm._l((_vm.dataList), function(item, index) {
+	  }, _vm._l((_vm.DATALIST), function(item, index) {
 	    return _c('div', {
-	      key: index,
+	      key: item,
 	      staticClass: "waterfall-unit",
 	      attrs: {
 	        "index": index
 	      }
-	    }, [_c(_vm.itemComponent, {
-	      tag: "Component",
-	      attrs: {
-	        "item": item,
-	        "index": index
-	      }
-	    })], 1)
+	    }, [_vm._t("default", [_vm._v("\n            loading\n        ")], {
+	      item: item,
+	      index: index
+	    })], 2)
 	  }))
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
@@ -12075,9 +12072,20 @@
 	    staticClass: "app"
 	  }, [_c('WaterFall', {
 	    attrs: {
-	      "dataList": _vm.items,
-	      "item-component": _vm.$options.components.item
-	    }
+	      "DATALIST": _vm.items,
+	      "ItemComponent": _vm.$options.components.item
+	    },
+	    scopedSlots: _vm._u([{
+	      key: "default",
+	      fn: function(waterfallItem) {
+	        return [_vm._v("\n            " + _vm._s(waterfallItem.item.name) + "\n            "), _c('img', {
+	          attrs: {
+	            "src": waterfallItem.item.imgURL,
+	            "alt": ""
+	          }
+	        }), _vm._v("\n            " + _vm._s(waterfallItem.index) + "\n        ")]
+	      }
+	    }])
 	  })], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true

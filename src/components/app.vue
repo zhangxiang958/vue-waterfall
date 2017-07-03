@@ -44,9 +44,15 @@
     <div class="app">
         <!--堆糖网数据格式 https://www.duitang.com/napi/index/hot/?start=0&include_fields=sender%2Calbum&limit=24&_=1498375527639-->
         <WaterFall 
-            :dataList="items"
-            :item-component="$options.components.item"
-        />
+            :DATALIST="items"
+            :ItemComponent="$options.components.item"
+        >
+            <template scope="waterfallItem">
+                {{ waterfallItem.item.name }}
+                <img :src="waterfallItem.item.imgURL" alt="">
+                {{ waterfallItem.index }}
+            </template>
+        </WaterFall>
     </div>
 </template>
 

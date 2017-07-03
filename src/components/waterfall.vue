@@ -3,41 +3,41 @@
 
     export default {
         props: {
-            MINColumn: {
+            MIN_COLUMN: {
                 type: Number,
                 default: 2,
                 validator: function(value){
                     return value >= 2;
                 }
             },
-            GapWidth: {
+            GAP_WIDTH: {
                 type: Number,
                 default: 5,
                 validator: function(value){
                     return value >= 0;
                 }
             },
-            GapHeight: {
+            GAP_HEIGHT: {
                 type: Number,
                 default: 15,
                 validator: function(value){
                     return value >= 0;
                 }
             },
-            colWidth: {
+            COLWIDTH: {
                 type: Number,
                 default: 180,
                 validator: function(value){
                     return value >= 0;
                 }
             },
-            dataList: {
+            DATALIST: {
                 type: Array,
                 default: function(){
                     return []
                 }
             },
-            itemComponent: {
+            ItemComponent: {
                 required: true
             }
         },
@@ -65,16 +65,16 @@
                 let body = document.body;
                 let bodyWidth = body.offsetWidth;
                 console.log(bodyWidth);
-                let GapWidth = this.GapWidth;
-                let colWidth = this.colWidth;
+                let GapWidth = this.GAP_WIDTH;
+                let colWidth = this.COLWIDTH;
 
                 console.log(Math.max(
-                    this.MINColumn, 
+                    this.MIN_COLUMN, 
                     Math.floor( (bodyWidth + GapWidth) / (colWidth + GapWidth) )
                     )
                 );
                 return Math.max(
-                    this.MINColumn, 
+                    this.MIN_COLUMN, 
                     Math.floor( (bodyWidth + GapWidth) / (colWidth + GapWidth) )
                     );
             },
@@ -87,7 +87,7 @@
                 }
 
                 //init the comtainer width
-                let colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
+                let colContainerWidth = colAmount * (this.COLWIDTH + this.GAP_WIDTH) - this.GAP_WIDTH;
                 this.colContainer.style.cssText = `width: ${colContainerWidth}px;`;
             },
             manageCell(){
@@ -106,10 +106,10 @@
                         colMinHeight = colInfo.minHeight;
                     
                     let height = unit.offsetHeight,
-                        left = colMinIndex * (this.colWidth + this.GapWidth),
+                        left = colMinIndex * (this.COLWIDTH + this.GAP_WIDTH),
                         top = colMinHeight;
 
-                    unit.style.cssText = `width: ${this.colWidth}px;
+                    unit.style.cssText = `width: ${this.COLWIDTH}px;
                                           left: ${left}px;
                                           top: ${top}px`;
 
@@ -126,8 +126,11 @@
 
 <template>
     <div id="waterfall">
-        <div class="waterfall-unit" v-for="(item, index) in dataList" :key="index" :index="index">
-            <Component :is="itemComponent" :item="item" :index="index" />
+        <div class="waterfall-unit" v-for="(item, index) in DATALIST" :key="item" :index="index">
+            <!--<Component :is="ItemComponent" :item="item" :index="index" />-->
+            <slot :item="item" :index="index">
+                loading
+            </slot>
         </div>
     </div>
 </template>
