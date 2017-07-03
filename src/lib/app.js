@@ -9775,7 +9775,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/app.vue"
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9833,7 +9833,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.item[data-v-449cab76] {\n    margin: 5px;\n    width: 200px;\n    height: 300px;\n    line-height: 300px;\n    background: #ccc;\n    text-align: center;\n}\n", ""]);
+	exports.push([module.id, "\n.app[data-v-449cab76] {\n    margin: 0;\n}\n", ""]);
 
 	// exports
 
@@ -10296,19 +10296,24 @@
 	        return {
 	            items: [{
 	                name: 'hah',
-	                imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg'
+	                imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg',
+	                imgHeight: 200
 	            }, {
 	                name: 'test2',
-	                imgURL: 'http://im5.tongbu.com/tbnews/201604/5ba60557-2.gif?w=500,281&b=559'
+	                imgURL: 'http://im5.tongbu.com/tbnews/201604/5ba60557-2.gif?w=500,281&b=559',
+	                imgHeight: 230
 	            }, {
 	                name: 'test3',
-	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg'
+	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
+	                imgHeight: 230
 	            }, {
 	                name: 'test4',
-	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg'
+	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+	                imgHeight: 180
 	            }, {
 	                name: 'test5',
-	                imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg'
+	                imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg',
+	                imgHeight: 300
 	            }]
 	        };
 	    },
@@ -10339,7 +10344,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/waterfall.vue"
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\waterfall.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] waterfall.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10397,7 +10402,7 @@
 
 
 	// module
-	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    position: relative;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n", ""]);
+	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n", ""]);
 
 	// exports
 
@@ -10436,14 +10441,14 @@
 	        },
 	        GapHeight: {
 	            type: Number,
-	            default: 5,
+	            default: 15,
 	            validator: function validator(value) {
 	                return value >= 0;
 	            }
 	        },
 	        colWidth: {
 	            type: Number,
-	            default: 100,
+	            default: 180,
 	            validator: function validator(value) {
 	                return value >= 0;
 	            }
@@ -10482,6 +10487,7 @@
 	        getColAmount: function getColAmount() {
 	            var body = document.body;
 	            var bodyWidth = body.offsetWidth;
+	            console.log(bodyWidth);
 	            var GapWidth = this.GapWidth;
 	            var colWidth = this.colWidth;
 
@@ -10498,7 +10504,7 @@
 
 	            //init the comtainer width
 	            var colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
-	            this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px';
+	            this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px;';
 	        },
 	        manageCell: function manageCell() {
 
@@ -10521,14 +10527,14 @@
 	                    left = colMinIndex * (_this.colWidth + _this.GapWidth),
 	                    top = colMinHeight;
 
-	                unit.style.cssText = 'width: ' + _this.colWidth + 'px;\n                                    \n                                      left: ' + left + 'px;\n                                      top: ' + top + 'px';
+	                unit.style.cssText = 'width: ' + _this.colWidth + 'px;\n                                      left: ' + left + 'px;\n                                      top: ' + top + 'px';
 
 	                columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
 	                console.log(columnTop);
 	            });
 
 	            var maxHeightVal = _util2.default.getMaxVal(columnTop).maxHeight;
-	            this.colContainer.style.cssText = 'height: ' + maxHeightVal + 'px';
+	            this.colContainer.style.cssText += 'height: ' + maxHeightVal + 'px';
 	        }
 	    }
 	};
@@ -11954,7 +11960,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/item.vue"
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\item.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12047,7 +12053,8 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [_c('div', [_c('img', {
 	    attrs: {
-	      "src": _vm.item.imgURL
+	      "src": _vm.item.imgURL,
+	      "height": _vm.item.imgHeight
 	    }
 	  })]), _vm._v("\n  " + _vm._s(_vm.item.name) + "\n  " + _vm._s(_vm.index) + "\n")])
 	},staticRenderFns: []}

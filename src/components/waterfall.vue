@@ -19,14 +19,14 @@
             },
             GapHeight: {
                 type: Number,
-                default: 5,
+                default: 15,
                 validator: function(value){
                     return value >= 0;
                 }
             },
             colWidth: {
                 type: Number,
-                default: 100,
+                default: 180,
                 validator: function(value){
                     return value >= 0;
                 }
@@ -64,6 +64,7 @@
             getColAmount(){
                 let body = document.body;
                 let bodyWidth = body.offsetWidth;
+                console.log(bodyWidth);
                 let GapWidth = this.GapWidth;
                 let colWidth = this.colWidth;
 
@@ -87,7 +88,7 @@
 
                 //init the comtainer width
                 let colContainerWidth = colAmount * (this.colWidth + this.GapWidth) - this.GapWidth;
-                this.colContainer.style.cssText = `width: ${colContainerWidth}px`;
+                this.colContainer.style.cssText = `width: ${colContainerWidth}px;`;
             },
             manageCell(){
 
@@ -109,7 +110,6 @@
                         top = colMinHeight;
 
                     unit.style.cssText = `width: ${this.colWidth}px;
-                                        
                                           left: ${left}px;
                                           top: ${top}px`;
 
@@ -118,7 +118,7 @@
                 });
 
                 var maxHeightVal = Util.getMaxVal(columnTop).maxHeight;
-                this.colContainer.style.cssText = `height: ${maxHeightVal}px`;
+                this.colContainer.style.cssText += `height: ${maxHeightVal}px`;
             }
         }
     }
@@ -135,6 +135,7 @@
 <style scoped>
     #waterfall {
         position: relative;
+        margin: 0 auto;
     }
     .waterfall-unit {
         position: absolute;

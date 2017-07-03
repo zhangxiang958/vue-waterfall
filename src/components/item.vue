@@ -18,7 +18,7 @@ export default {
 <template>
   <div>
     <div>
-      <img :src="item.imgURL" />
+      <img :src="item.imgURL" :height="item.imgHeight" />
     </div>
     {{ item.name }}
     {{ index }}
