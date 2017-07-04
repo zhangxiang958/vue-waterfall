@@ -53,7 +53,10 @@
             console.log('water mounted');
             this.init();
             window.addEventListener('resize', () => {
-                this.init();
+                
+                this.$nextTick(() => {
+                    this.init();
+                });
             });
         },
         methods: {
@@ -62,7 +65,7 @@
                 this.waterfallWrapper = document.querySelector("#waterfall");
                 this.colContainer = document.querySelector('#waterfall-container');
                 /** caculate the col num */
-                var colAmount = this.getColAmount();
+                let colAmount = this.getColAmount();
                 /** according to colAmount to setup the array which remmber the height of every col */
                 this.markColumnTop(colAmount);
                 /** adjust the cells */

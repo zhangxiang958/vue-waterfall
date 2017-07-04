@@ -10483,7 +10483,10 @@
 	        console.log('water mounted');
 	        this.init();
 	        window.addEventListener('resize', function () {
-	            _this.init();
+
+	            _this.$nextTick(function () {
+	                _this.init();
+	            });
 	        });
 	    },
 
