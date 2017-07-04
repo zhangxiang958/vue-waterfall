@@ -10285,11 +10285,9 @@
 
 	var _waterfall2 = _interopRequireDefault(_waterfall);
 
-	var _item = __webpack_require__(84);
-
-	var _item2 = _interopRequireDefault(_item);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import item from './item.vue';
 
 	exports.default = {
 	    data: function data() {
@@ -10314,12 +10312,20 @@
 	                name: 'test5',
 	                imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg',
 	                imgHeight: 300
+	            }, {
+	                name: 'test4',
+	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+	                imgHeight: 180
+	            }, {
+	                name: 'test3',
+	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
+	                imgHeight: 230
 	            }]
 	        };
 	    },
 
 	    components: {
-	        WaterFall: _waterfall2.default, item: _item2.default
+	        WaterFall: _waterfall2.default
 	    }
 	};
 
@@ -10402,7 +10408,7 @@
 
 
 	// module
-	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n", ""]);
+	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    width: 100%;\n    overflow-x: hidden;\n}\n.waterfall-container[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n    overflow: hidden;\n    zoom: 1;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n", ""]);
 
 	// exports
 
@@ -10458,14 +10464,13 @@
 	            default: function _default() {
 	                return [];
 	            }
-	        },
-	        ItemComponent: {
-	            required: true
 	        }
 	    },
 	    data: function data() {
 	        return {
 	            columnTop: [],
+	            col_width: this.COLWIDTH,
+	            waterfallWrapper: null,
 	            colContainer: null
 	        };
 	    },
@@ -10473,15 +10478,25 @@
 	        console.log('water created');
 	    },
 	    mounted: function mounted() {
+	        var _this = this;
+
 	        console.log('water mounted');
 	        this.init();
+	        window.addEventListener('resize', function () {
+	            _this.init();
+	        });
 	    },
 
 	    methods: {
 	        init: function init() {
-	            this.colContainer = document.querySelector('#waterfall');
+	            /** get the container and save */
+	            this.waterfallWrapper = document.querySelector("#waterfall");
+	            this.colContainer = document.querySelector('#waterfall-container');
+	            /** caculate the col num */
 	            var colAmount = this.getColAmount();
+	            /** according to colAmount to setup the array which remmber the height of every col */
 	            this.markColumnTop(colAmount);
+	            /** adjust the cells */
 	            this.manageCell();
 	        },
 	        getColAmount: function getColAmount() {
@@ -10492,19 +10507,34 @@
 	            var colWidth = this.COLWIDTH;
 
 	            console.log(Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth))));
+	            console.log(Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
 	            return Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
 	        },
 	        markColumnTop: function markColumnTop(colAmount) {
 
 	            //set a array for every column to mark the top, so we can know which column's height is smallest
+	            this.columnTop = [];
 	            for (var i = 0; i < colAmount; i++) {
 
 	                this.columnTop.push(0);
 	            }
 
 	            //init the comtainer width
+	            var wrapperWidth = document.body.offsetWidth;
 	            var colContainerWidth = colAmount * (this.COLWIDTH + this.GAP_WIDTH) - this.GAP_WIDTH;
-	            this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px;';
+	            console.log(colContainerWidth);
+	            this.waterfallWrapper.style.cssText = 'width: ' + wrapperWidth + 'px;';
+	            if (wrapperWidth >= colContainerWidth) {
+
+	                this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px;';
+	            } else {
+
+	                this.col_width = Math.floor((wrapperWidth - this.GAP_WIDTH * (colAmount - 1)) / colAmount);
+	                console.log(this.col_width);
+	                var _colContainerWidth = colAmount * (this.col_width + this.GAP_WIDTH) - this.GAP_WIDTH;
+	                console.log(_colContainerWidth);
+	                this.colContainer.style.cssText = 'width: ' + _colContainerWidth + 'px;';
+	            }
 	        },
 	        manageCell: function manageCell() {
 
@@ -10513,9 +10543,17 @@
 	            this.adjustCells(this.colContainer.children);
 	        },
 	        adjustCells: function adjustCells(units) {
-	            var _this = this;
+	            var _this2 = this;
 
 	            var columnTop = this.columnTop;
+	            var colWidth = void 0;
+	            if (this.col_width === this.COLWIDTH) {
+
+	                colWidth = this.COLWIDTH;
+	            } else {
+	                console.warn('已根据屏幕宽度适配单元格宽度.');
+	                colWidth = this.col_width;
+	            }
 
 	            Array.prototype.slice.call(units).forEach(function (unit, i) {
 
@@ -10524,17 +10562,18 @@
 	                    colMinHeight = colInfo.minHeight;
 
 	                var height = unit.offsetHeight,
-	                    left = colMinIndex * (_this.COLWIDTH + _this.GAP_WIDTH),
+	                    left = colMinIndex * (colWidth + _this2.GAP_WIDTH),
 	                    top = colMinHeight;
 
-	                unit.style.cssText = 'width: ' + _this.COLWIDTH + 'px;\n                                      left: ' + left + 'px;\n                                      top: ' + top + 'px';
+	                unit.style.cssText = 'width: ' + colWidth + 'px;\n                                    left: ' + left + 'px;\n                                    top: ' + top + 'px';
 
 	                columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
 	                console.log(columnTop);
 	            });
 
 	            var maxHeightVal = _util2.default.getMaxVal(columnTop).maxHeight;
-	            this.colContainer.style.cssText += 'height: ' + maxHeightVal + 'px';
+	            this.waterfallWrapper.style.cssText += 'height: ' + maxHeightVal + 'px;';
+	            this.colContainer.style.cssText += 'height: ' + maxHeightVal + 'px;';
 	        }
 	    }
 	};
@@ -11911,9 +11950,14 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
+	  return _c('section', {
 	    attrs: {
 	      "id": "waterfall"
+	    }
+	  }, [_c('section', {
+	    staticClass: "waterfall-container",
+	    attrs: {
+	      "id": "waterfall-container"
 	    }
 	  }, _vm._l((_vm.DATALIST), function(item, index) {
 	    return _c('div', {
@@ -11922,11 +11966,11 @@
 	      attrs: {
 	        "index": index
 	      }
-	    }, [_vm._t("default", [_vm._v("\n            loading\n        ")], {
+	    }, [_vm._t("default", [_vm._v("\n                loading.....\n            ")], {
 	      item: item,
 	      index: index
 	    })], 2)
-	  }))
+	  }))])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11937,133 +11981,11 @@
 	}
 
 /***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var disposed = false
-	function injectStyle (ssrContext) {
-	  if (disposed) return
-	  __webpack_require__(85)
-	}
-	var Component = __webpack_require__(8)(
-	  /* script */
-	  __webpack_require__(87),
-	  /* template */
-	  __webpack_require__(88),
-	  /* styles */
-	  injectStyle,
-	  /* scopeId */
-	  null,
-	  /* moduleIdentifier (server only) */
-	  null
-	)
-	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\item.vue"
-	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-	if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-489090c2", Component.options)
-	  } else {
-	    hotAPI.reload("data-v-489090c2", Component.options)
-	  }
-	  module.hot.dispose(function (data) {
-	    disposed = true
-	  })
-	})()}
-
-	module.exports = Component.exports
-
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(86);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	if(content.locals) module.exports = content.locals;
-	// add the styles to the DOM
-	var update = __webpack_require__(6)("10dd23cb", content, false);
-	// Hot Module Replacement
-	if(false) {
-	 // When the styles change, update the <style> tags
-	 if(!content.locals) {
-	   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-489090c2\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
-	     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-489090c2\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
-	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-	     update(newContent);
-	   });
-	 }
-	 // When the module is disposed, remove the <style> tags
-	 module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)(undefined);
-	// imports
-
-
-	// module
-	exports.push([module.id, "\nimg {\n  width: 100%;\n}\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  props: {
-	    item: {
-	      type: Object
-	    },
-	    index: {
-	      type: Number
-	    }
-	  },
-	  data: function data() {
-	    return {};
-	  }
-	};
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('div', [_c('img', {
-	    attrs: {
-	      "src": _vm.item.imgURL,
-	      "height": _vm.item.imgHeight
-	    }
-	  })]), _vm._v("\n  " + _vm._s(_vm.item.name) + "\n  " + _vm._s(_vm.index) + "\n")])
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-489090c2", module.exports)
-	  }
-	}
-
-/***/ }),
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12072,16 +11994,19 @@
 	    staticClass: "app"
 	  }, [_c('WaterFall', {
 	    attrs: {
-	      "DATALIST": _vm.items,
-	      "ItemComponent": _vm.$options.components.item
+	      "DATALIST": _vm.items
 	    },
 	    scopedSlots: _vm._u([{
 	      key: "default",
 	      fn: function(waterfallItem) {
 	        return [_vm._v("\n            " + _vm._s(waterfallItem.item.name) + "\n            "), _c('img', {
+	          staticStyle: {
+	            "width": "100%"
+	          },
 	          attrs: {
 	            "src": waterfallItem.item.imgURL,
-	            "alt": ""
+	            "alt": "",
+	            "height": waterfallItem.item.imgHeight
 	          }
 	        }), _vm._v("\n            " + _vm._s(waterfallItem.index) + "\n        ")]
 	      }

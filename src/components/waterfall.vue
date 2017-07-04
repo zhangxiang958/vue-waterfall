@@ -36,14 +36,13 @@
                 default: function(){
                     return []
                 }
-            },
-            ItemComponent: {
-                required: true
             }
         },
         data() {
             return {
                 columnTop: [],
+                col_width: this.COLWIDTH,
+                waterfallWrapper: null,
                 colContainer: null
             }
         },
@@ -53,12 +52,20 @@
         mounted() {
             console.log('water mounted');
             this.init();
+            window.addEventListener('resize', () => {
+                this.init();
+            });
         },
         methods: {
             init() {
-                this.colContainer = document.querySelector('#waterfall');
+                /** get the container and save */
+                this.waterfallWrapper = document.querySelector("#waterfall");
+                this.colContainer = document.querySelector('#waterfall-container');
+                /** caculate the col num */
                 var colAmount = this.getColAmount();
+                /** according to colAmount to setup the array which remmber the height of every col */
                 this.markColumnTop(colAmount);
+                /** adjust the cells */
                 this.manageCell();
             },
             getColAmount(){
@@ -73,6 +80,7 @@
                     Math.floor( (bodyWidth + GapWidth) / (colWidth + GapWidth) )
                     )
                 );
+                console.log(Math.floor( (bodyWidth + GapWidth) / (colWidth + GapWidth) ));
                 return Math.max(
                     this.MIN_COLUMN, 
                     Math.floor( (bodyWidth + GapWidth) / (colWidth + GapWidth) )
@@ -81,23 +89,52 @@
             markColumnTop(colAmount) {
                 
                 //set a array for every column to mark the top, so we can know which column's height is smallest
+                this.columnTop = [];
                 for(var i = 0; i < colAmount; i++) {
                     
                     this.columnTop.push(0);
                 }
 
                 //init the comtainer width
+                let wrapperWidth = document.body.offsetWidth;
                 let colContainerWidth = colAmount * (this.COLWIDTH + this.GAP_WIDTH) - this.GAP_WIDTH;
-                this.colContainer.style.cssText = `width: ${colContainerWidth}px;`;
+                console.log(colContainerWidth);
+                this.waterfallWrapper.style.cssText = `width: ${wrapperWidth}px;`;
+                if(wrapperWidth >= colContainerWidth) {
+
+                    this.colContainer.style.cssText = `width: ${colContainerWidth}px;`;
+                } else {
+
+                    this.col_width = Math.floor(
+                                    ( wrapperWidth - 
+                                    (this.GAP_WIDTH * (colAmount - 1) ) 
+                                    ) 
+                                    / 
+                                    colAmount);
+                    console.log(this.col_width);
+                    let colContainerWidth = colAmount * (this.col_width + this.GAP_WIDTH) - this.GAP_WIDTH;
+                    console.log(colContainerWidth);
+                    this.colContainer.style.cssText = `width: ${colContainerWidth}px;`;
+                }
+
             },
             manageCell(){
 
-                var minColHeight = Util.getMinVal(this.columnTop);
+                let minColHeight = Util.getMinVal(this.columnTop);
                 console.log(minColHeight);
                 this.adjustCells(this.colContainer.children);
             },
             adjustCells(units){
-                var columnTop = this.columnTop
+                let columnTop = this.columnTop;
+                let colWidth;
+                if(this.col_width === this.COLWIDTH) {
+
+                    colWidth = this.COLWIDTH;
+                } else {
+                    console.warn('已根据屏幕宽度适配单元格宽度.');
+                    colWidth = this.col_width;
+                }
+
 
                 Array.prototype.slice.call(units).forEach((unit, i) => {
 
@@ -106,39 +143,47 @@
                         colMinHeight = colInfo.minHeight;
                     
                     let height = unit.offsetHeight,
-                        left = colMinIndex * (this.COLWIDTH + this.GAP_WIDTH),
-                        top = colMinHeight;
+                    left = colMinIndex * (colWidth + this.GAP_WIDTH),
+                    top = colMinHeight;
 
-                    unit.style.cssText = `width: ${this.COLWIDTH}px;
-                                          left: ${left}px;
-                                          top: ${top}px`;
-
+                    unit.style.cssText = `width: ${colWidth}px;
+                                        left: ${left}px;
+                                        top: ${top}px`;
+                    
                     columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
                     console.log(columnTop);
                 });
 
-                var maxHeightVal = Util.getMaxVal(columnTop).maxHeight;
-                this.colContainer.style.cssText += `height: ${maxHeightVal}px`;
+                let maxHeightVal = Util.getMaxVal(columnTop).maxHeight;
+                this.waterfallWrapper.style.cssText += `height: ${maxHeightVal}px;`;
+                this.colContainer.style.cssText += `height: ${maxHeightVal}px;`;
             }
         }
     }
 </script>
 
 <template>
-    <div id="waterfall">
-        <div class="waterfall-unit" v-for="(item, index) in DATALIST" :key="item" :index="index">
-            <!--<Component :is="ItemComponent" :item="item" :index="index" />-->
-            <slot :item="item" :index="index">
-                loading
-            </slot>
-        </div>
-    </div>
+    <section id="waterfall">
+        <section class="waterfall-container" id="waterfall-container">
+            <div class="waterfall-unit" v-for="(item, index) in DATALIST" :key="item" :index="index">
+                <slot :item="item" :index="index">
+                    loading.....
+                </slot>
+            </div>
+        </section>
+    </section>
 </template>
 
 <style scoped>
     #waterfall {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    .waterfall-container {
         position: relative;
         margin: 0 auto;
+        overflow: hidden;
+        zoom: 1;
     }
     .waterfall-unit {
         position: absolute;
