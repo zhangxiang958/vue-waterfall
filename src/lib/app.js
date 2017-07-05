@@ -10495,7 +10495,7 @@
 	            this.$nextTick(function () {
 
 	                var cells = _this.$el.querySelector('.cellready');
-	                console.log(cells);
+	                // console.log(cells);
 	                cells.length ? cells = Array.prototype.slice.call(cells, 0) : cells = [cells];
 
 	                _this.adjustCells(cells);
@@ -10595,7 +10595,7 @@
 	                colWidth = this.col_width;
 	            }
 
-	            console.log(units);
+	            // console.log(units);
 	            units.forEach(function (unit, i) {
 
 	                var colInfo = _util2.default.getMinVal(columnTop),
@@ -10610,7 +10610,7 @@
 
 	                unit.className = unit.className.replace(/\bcellready\b/, '');
 	                columnTop[colMinIndex] = colMinHeight === 0 ? colMinHeight + unit.offsetHeight : colMinHeight + unit.offsetHeight + _this3.GAP_HEIGHT;
-	                console.log(columnTop);
+	                // console.log(columnTop);
 	            });
 
 	            var maxHeightVal = _util2.default.getMaxVal(columnTop).maxHeight;

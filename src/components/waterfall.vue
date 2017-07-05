@@ -44,7 +44,7 @@
                 this.$nextTick(() => {
                     
                     let cells = this.$el.querySelector('.cellready');
-                    console.log(cells);
+                    // console.log(cells);
                     cells.length ? (cells = Array.prototype.slice.call(cells, 0)) : (cells = [cells]);
 
                     this.adjustCells(cells);
@@ -152,7 +152,7 @@
                     colWidth = this.col_width;
                 }
 
-                console.log(units);
+                // console.log(units);
                 units.forEach((unit, i) => {
 
                     let colInfo = Util.getMinVal(columnTop),
@@ -169,7 +169,7 @@
                     
                     unit.className = unit.className.replace(/\bcellready\b/, '');
                     columnTop[colMinIndex] = colMinHeight === 0 ? colMinHeight + unit.offsetHeight : colMinHeight + unit.offsetHeight + this.GAP_HEIGHT;
-                    console.log(columnTop);
+                    // console.log(columnTop);
                 });
 
                 let maxHeightVal = Util.getMaxVal(columnTop).maxHeight;
