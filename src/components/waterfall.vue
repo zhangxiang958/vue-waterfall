@@ -38,6 +38,19 @@
                 }
             }
         },
+        watch: {
+            DATALIST: function(newVal){
+
+                this.$nextTick(() => {
+                    
+                    let cells = this.$el.querySelector('.cellready');
+                    console.log(cells);
+                    cells.length ? (cells = Array.prototype.slice.call(cells, 0)) : (cells = [cells]);
+
+                    this.adjustCells(cells);
+                });
+            }
+        },
         data() {
             return {
                 columnTop: [],
@@ -64,9 +77,9 @@
                 /** get the container and save */
                 this.waterfallWrapper = document.querySelector("#waterfall");
                 this.colContainer = document.querySelector('#waterfall-container');
-                /** caculate the col num */
+                /** caculate the col amount */
                 let colAmount = this.getColAmount();
-                /** according to colAmount to setup the array which remmber the height of every col */
+                /** according to colAmount to setup the array which remember the height of every col */
                 this.markColumnTop(colAmount);
                 /** adjust the cells */
                 this.manageCell();
@@ -125,7 +138,8 @@
 
                 let minColHeight = Util.getMinVal(this.columnTop);
                 console.log(minColHeight);
-                this.adjustCells(this.colContainer.children);
+                let children = Array.prototype.slice.call(this.colContainer.children);
+                this.adjustCells(children);
             },
             adjustCells(units){
                 let columnTop = this.columnTop;
@@ -138,8 +152,8 @@
                     colWidth = this.col_width;
                 }
 
-
-                Array.prototype.slice.call(units).forEach((unit, i) => {
+                console.log(units);
+                units.forEach((unit, i) => {
 
                     let colInfo = Util.getMinVal(columnTop),
                         colMinIndex = colInfo.index,
@@ -147,13 +161,14 @@
                     
                     let height = unit.offsetHeight,
                     left = colMinIndex * (colWidth + this.GAP_WIDTH),
-                    top = colMinHeight;
+                    top = colMinHeight === 0 ? colMinHeight : colMinHeight + this.GAP_HEIGHT;
 
                     unit.style.cssText = `width: ${colWidth}px;
                                         left: ${left}px;
                                         top: ${top}px`;
                     
-                    columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
+                    unit.className = unit.className.replace(/\bcellready\b/, '');
+                    columnTop[colMinIndex] = colMinHeight === 0 ? colMinHeight + unit.offsetHeight : colMinHeight + unit.offsetHeight + this.GAP_HEIGHT;
                     console.log(columnTop);
                 });
 
@@ -168,8 +183,8 @@
 <template>
     <section id="waterfall">
         <section class="waterfall-container" id="waterfall-container">
-            <div class="waterfall-unit" v-for="(item, index) in DATALIST" :key="item" :index="index">
-                <slot :item="item" :index="index">
+            <div class="waterfall-unit cellready" v-for="(item, index) in DATALIST" :key="item" :index="index" >
+                <slot :item="item" :index="index" :width="col_width">
                     loading.....
                 </slot>
             </div>
@@ -190,5 +205,8 @@
     }
     .waterfall-unit {
         position: absolute;
+    }
+    .cellready {
+        display: none;
     }
 </style>

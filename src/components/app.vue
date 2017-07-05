@@ -3,6 +3,11 @@
     // import item from './item.vue';
 
     export default {
+        mounted() {
+            window.onscroll = () => {
+                this.getList();
+            }
+        },
         data() {
             return {
                 items: [
@@ -44,6 +49,21 @@
                 ]
             }
         },
+        methods: {
+            getList() {
+                
+                this.items.push({
+                    name: 'test3',
+                    imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
+                    imgHeight: 230
+                }, {
+                    name: 'test4',
+                    imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+                    imgHeight: 180
+                });
+                // console.log(this.items);
+            }
+        },
         components: {
             WaterFall
         }
@@ -58,6 +78,7 @@
             :DATALIST="items"
         >
             <template scope="waterfallItem">
+                {{ waterfallItem.width }}
                 {{ waterfallItem.item.name }}
                 <img :src="waterfallItem.item.imgURL" alt="" style="width: 100%;" :height="waterfallItem.item.imgHeight">
                 {{ waterfallItem.index }}

@@ -10290,6 +10290,13 @@
 	// import item from './item.vue';
 
 	exports.default = {
+	    mounted: function mounted() {
+	        var _this = this;
+
+	        window.onscroll = function () {
+	            _this.getList();
+	        };
+	    },
 	    data: function data() {
 	        return {
 	            items: [{
@@ -10324,6 +10331,21 @@
 	        };
 	    },
 
+	    methods: {
+	        getList: function getList() {
+
+	            this.items.push({
+	                name: 'test3',
+	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
+	                imgHeight: 230
+	            }, {
+	                name: 'test4',
+	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+	                imgHeight: 180
+	            });
+	            // console.log(this.items);
+	        }
+	    },
 	    components: {
 	        WaterFall: _waterfall2.default
 	    }
@@ -10408,7 +10430,7 @@
 
 
 	// module
-	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    width: 100%;\n    overflow-x: hidden;\n}\n.waterfall-container[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n    overflow: hidden;\n    zoom: 1;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n", ""]);
+	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    width: 100%;\n    overflow-x: hidden;\n}\n.waterfall-container[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n    overflow: hidden;\n    zoom: 1;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n.cellready[data-v-cdf86094] {\n    display: none;\n}\n", ""]);
 
 	// exports
 
@@ -10466,6 +10488,20 @@
 	            }
 	        }
 	    },
+	    watch: {
+	        DATALIST: function DATALIST(newVal) {
+	            var _this = this;
+
+	            this.$nextTick(function () {
+
+	                var cells = _this.$el.querySelector('.cellready');
+	                console.log(cells);
+	                cells.length ? cells = Array.prototype.slice.call(cells, 0) : cells = [cells];
+
+	                _this.adjustCells(cells);
+	            });
+	        }
+	    },
 	    data: function data() {
 	        return {
 	            columnTop: [],
@@ -10478,14 +10514,14 @@
 	        console.log('water created');
 	    },
 	    mounted: function mounted() {
-	        var _this = this;
+	        var _this2 = this;
 
 	        console.log('water mounted');
 	        this.init();
 	        window.addEventListener('resize', function () {
 
-	            _this.$nextTick(function () {
-	                _this.init();
+	            _this2.$nextTick(function () {
+	                _this2.init();
 	            });
 	        });
 	    },
@@ -10495,9 +10531,9 @@
 	            /** get the container and save */
 	            this.waterfallWrapper = document.querySelector("#waterfall");
 	            this.colContainer = document.querySelector('#waterfall-container');
-	            /** caculate the col num */
+	            /** caculate the col amount */
 	            var colAmount = this.getColAmount();
-	            /** according to colAmount to setup the array which remmber the height of every col */
+	            /** according to colAmount to setup the array which remember the height of every col */
 	            this.markColumnTop(colAmount);
 	            /** adjust the cells */
 	            this.manageCell();
@@ -10543,10 +10579,11 @@
 
 	            var minColHeight = _util2.default.getMinVal(this.columnTop);
 	            console.log(minColHeight);
-	            this.adjustCells(this.colContainer.children);
+	            var children = Array.prototype.slice.call(this.colContainer.children);
+	            this.adjustCells(children);
 	        },
 	        adjustCells: function adjustCells(units) {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            var columnTop = this.columnTop;
 	            var colWidth = void 0;
@@ -10558,19 +10595,21 @@
 	                colWidth = this.col_width;
 	            }
 
-	            Array.prototype.slice.call(units).forEach(function (unit, i) {
+	            console.log(units);
+	            units.forEach(function (unit, i) {
 
 	                var colInfo = _util2.default.getMinVal(columnTop),
 	                    colMinIndex = colInfo.index,
 	                    colMinHeight = colInfo.minHeight;
 
 	                var height = unit.offsetHeight,
-	                    left = colMinIndex * (colWidth + _this2.GAP_WIDTH),
-	                    top = colMinHeight;
+	                    left = colMinIndex * (colWidth + _this3.GAP_WIDTH),
+	                    top = colMinHeight === 0 ? colMinHeight : colMinHeight + _this3.GAP_HEIGHT;
 
 	                unit.style.cssText = 'width: ' + colWidth + 'px;\n                                    left: ' + left + 'px;\n                                    top: ' + top + 'px';
 
-	                columnTop[colMinIndex] = colMinHeight + unit.offsetHeight;
+	                unit.className = unit.className.replace(/\bcellready\b/, '');
+	                columnTop[colMinIndex] = colMinHeight === 0 ? colMinHeight + unit.offsetHeight : colMinHeight + unit.offsetHeight + _this3.GAP_HEIGHT;
 	                console.log(columnTop);
 	            });
 
@@ -11965,13 +12004,14 @@
 	  }, _vm._l((_vm.DATALIST), function(item, index) {
 	    return _c('div', {
 	      key: item,
-	      staticClass: "waterfall-unit",
+	      staticClass: "waterfall-unit cellready",
 	      attrs: {
 	        "index": index
 	      }
 	    }, [_vm._t("default", [_vm._v("\n                loading.....\n            ")], {
 	      item: item,
-	      index: index
+	      index: index,
+	      width: _vm.col_width
 	    })], 2)
 	  }))])
 	},staticRenderFns: []}
@@ -12002,7 +12042,7 @@
 	    scopedSlots: _vm._u([{
 	      key: "default",
 	      fn: function(waterfallItem) {
-	        return [_vm._v("\n            " + _vm._s(waterfallItem.item.name) + "\n            "), _c('img', {
+	        return [_vm._v("\n            " + _vm._s(waterfallItem.width) + "\n            " + _vm._s(waterfallItem.item.name) + "\n            "), _c('img', {
 	          staticStyle: {
 	            "width": "100%"
 	          },
