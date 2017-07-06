@@ -10,6 +10,8 @@
         },
         data() {
             return {
+                page: 3,
+                perpage: 2,
                 items: [
                     {
                         name: 'hah',
@@ -41,11 +43,6 @@
                         imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
                         imgHeight: 180                        
                     },
-                    {
-                        name: 'test3',
-                        imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
-                        imgHeight: 230                        
-                    },
                 ]
             }
         },
@@ -61,6 +58,7 @@
                     imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
                     imgHeight: 180
                 });
+                this.page ++;
                 // console.log(this.items);
             }
         },
@@ -76,6 +74,8 @@
         <!--WaterFall 所有 props 配置项全部用大写，本组件数据项全部用小写-->
         <WaterFall 
             :DATALIST="items"
+            :PAGE="page"
+            :PERPAGE="perpage"
         >
             <template scope="waterfallItem">
                 {{ waterfallItem.width }}

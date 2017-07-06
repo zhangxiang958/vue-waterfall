@@ -9767,7 +9767,7 @@
 	  /* script */
 	  __webpack_require__(9),
 	  /* template */
-	  __webpack_require__(89),
+	  __webpack_require__(84),
 	  /* styles */
 	  injectStyle,
 	  /* scopeId */
@@ -9775,7 +9775,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\app.vue"
+	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10299,6 +10299,8 @@
 	    },
 	    data: function data() {
 	        return {
+	            page: 3,
+	            perpage: 2,
 	            items: [{
 	                name: 'hah',
 	                imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg',
@@ -10323,10 +10325,6 @@
 	                name: 'test4',
 	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
 	                imgHeight: 180
-	            }, {
-	                name: 'test3',
-	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
-	                imgHeight: 230
 	            }]
 	        };
 	    },
@@ -10343,6 +10341,7 @@
 	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
 	                imgHeight: 180
 	            });
+	            this.page++;
 	            // console.log(this.items);
 	        }
 	    },
@@ -10372,7 +10371,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\waterfall.vue"
+	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/waterfall.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] waterfall.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10486,6 +10485,12 @@
 	            default: function _default() {
 	                return [];
 	            }
+	        },
+	        PAGE: {
+	            type: Number
+	        },
+	        PERPAGE: {
+	            type: Number
 	        }
 	    },
 	    watch: {
@@ -10647,6 +10652,8 @@
 	})(undefined, function () {
 	  'use strict';
 
+	  var win = window,
+	      _offset = 0;
 	  var Util = {
 	    getMinVal: function getMinVal(list) {
 
@@ -10698,7 +10705,6 @@
 
 	      return null;
 	    }
-
 	  };
 
 	  return Util;
@@ -12024,12 +12030,7 @@
 	}
 
 /***/ }),
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12037,7 +12038,9 @@
 	    staticClass: "app"
 	  }, [_c('WaterFall', {
 	    attrs: {
-	      "DATALIST": _vm.items
+	      "DATALIST": _vm.items,
+	      "PAGE": _vm.page,
+	      "PERPAGE": _vm.perpage
 	    },
 	    scopedSlots: _vm._u([{
 	      key: "default",
