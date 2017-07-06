@@ -36,12 +36,6 @@
                 default: function(){
                     return []
                 }
-            },
-            PAGE: {
-                type: Number
-            },
-            PERPAGE: {
-                type: Number
             }
         },
         watch: {

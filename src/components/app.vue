@@ -74,8 +74,6 @@
         <!--WaterFall 所有 props 配置项全部用大写，本组件数据项全部用小写-->
         <WaterFall 
             :DATALIST="items"
-            :PAGE="page"
-            :PERPAGE="perpage"
         >
             <template scope="waterfallItem">
                 {{ waterfallItem.width }}
