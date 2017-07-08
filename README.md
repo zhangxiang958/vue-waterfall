@@ -32,6 +32,7 @@ Because this component must use the feature of vue -- scope slot, so
 
 ## Demo
 
+  see it in https://zhangxiang958.github.io/vue-waterfall/src/index.html
   
 ## License
 
