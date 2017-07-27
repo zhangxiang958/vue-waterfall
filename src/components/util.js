@@ -13,7 +13,7 @@
 
 }(this, function(){
   'use strict';
-
+  var win = window, _offset = 0;
   var Util = {
     getMinVal: function(list){
 
@@ -65,7 +65,6 @@
 
       return null;
     }
-    
   }
 
   return Util;
