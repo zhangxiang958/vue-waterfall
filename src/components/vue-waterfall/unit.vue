@@ -5,12 +5,15 @@
                 type: Number,
                 required: true
             }
+        },
+        mounted() {
+            // console.log(this.$parent.columnWidth);
         }
     }
 </script>
 
 <template>
-    <div class="waterfall-unit cellready">
+    <div class="waterfall-unit" :style="{ padding: `${this.$parent.columnGap}px` }">
         <slot>
             loading.....
         </slot>

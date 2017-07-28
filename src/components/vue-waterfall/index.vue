@@ -31,7 +31,7 @@
                 containerWidth: 0,
                 columnCount: 0,
                 columnWidth: 224,
-                columnGap: 5,
+                columnGap: 15,
             }
         },
         watch: {
@@ -74,7 +74,7 @@
                 let columnWidth = this.columnWidth;
                 for(let i = 0; i < columnCount; i++) {
                     this.column[i] = {
-                        left: (columnWidth + this.columnGap) * i,
+                        left: columnWidth * i,
                         top: 0,
                         count: 0
                     };
@@ -92,8 +92,10 @@
                     console.log(item.itemHeight);
                     let minHeightList = this.getMinHeightList();
                     this.adjustCell(item.$el, this.columnWidth, minHeightList.left, minHeightList.top);
-                    console.log(item.$el.clientHeight);
-                    this.adjustList(minHeightList, item.itemHeight);
+                    console.log('clientHeight:' + item.$el.clientHeight);
+                    let height = item.$el.clientHeight;
+                    //item.itemHeight
+                    this.adjustList(minHeightList, height);
                     this.setContainerBox(this.column.length, this.columnWidth, minHeightList.top);
                 });
             },
@@ -102,7 +104,7 @@
                 list.count ++;
             },
             adjustCell(item, width, left, top) {
-                item.style.cssText = `width: ${width}px; left: ${left}px; top: ${top}px`;
+                item.style.cssText += `; width: ${width}px; left: ${left}px; top: ${top}px;`;
             },
             getMinHeightList() {
                 var list = this.column.slice(0);
@@ -112,7 +114,7 @@
                 return list[0];
             },
             setContainerBox(count, width, height) {
-                document.querySelector('.waterfall').style.cssText = `width: ${count * width}px; height: ${height}px`;
+                document.querySelector('.waterfall').style.cssText += `; width: ${count * width}px; height: ${height}px;`;
             }
         }
     }
@@ -120,7 +122,7 @@
 
 <template>
     <div class="waterfall">
-        <slot></slot>
+        <slot :width="columnWidth"></slot>
     </div>
 </template>
 
@@ -129,5 +131,6 @@
         position: relative;
         margin: 0 auto;
         width: 100%;
+        overflow-x: hidden;
     }
 </style>
