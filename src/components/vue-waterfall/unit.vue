@@ -5,9 +5,6 @@
                 type: Number,
                 required: true
             }
-        },
-        mounted() {
-            // console.log(this.$parent.columnWidth);
         }
     }
 </script>

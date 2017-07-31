@@ -18,20 +18,28 @@
      *  代码 <span></span><span> 之间没有空格，所以不能使用这个方案
      * 4. 对于 unit 传入的高度我觉得应该是单元格的高度，不然复杂度太高，而且作为一个组件不应该知道里面的内容是什么，而且也没办法知道用户到底想设置那个块的内容高度
     */
+    import Util from './vue-waterUtil.js';
+
     export default {
-        mounted() {
-            this.unitList = this.$children;
-            this.init();
+        props: {
+            Gap_Width: {
+                type: Number,
+                default: 5
+            },
+            Column_Width: {
+                type: Number,
+                default: 224
+            }
         },
         data() {
             return {
                 unitList: [],
                 lastUnitLength: 0,
-                column: [],
                 containerWidth: 0,
+                column: [],
                 columnCount: 0,
-                columnWidth: 224,
-                columnGap: 15,
+                columnWidth: this.Column_Width,
+                columnGap: this.Gap_Width,
             }
         },
         watch: {
@@ -43,6 +51,10 @@
                 this.layout(list);
                 this.lastUnitLength = val.length;
             }
+        },
+        mounted() {
+            this.unitList = this.$children;
+            this.init();
         },
         methods: {
             init() {
@@ -61,10 +73,11 @@
                 this.initColumnTop(this.columnCount);
                 console.log(this.column);
                 //设置单元格宽度
-                // this.adjustCells(this.unitList);
+                // this.layout(this.unitList);
             },
             getColumnCount(width) {
-                if(width < 768) {
+                // width < 768
+                if(Util.isMobile()) {
                     return 2;
                 } else {
                     return Math.floor((width + this.columnGap) / (this.columnWidth + this.columnGap));
@@ -89,10 +102,10 @@
             },
             layout(unitList) {
                 unitList.forEach((item, index) => {
-                    console.log(item.itemHeight);
+                    // console.log(item.itemHeight);
                     let minHeightList = this.getMinHeightList();
                     this.adjustCell(item.$el, this.columnWidth, minHeightList.left, minHeightList.top);
-                    console.log('clientHeight:' + item.$el.clientHeight);
+                    // console.log('clientHeight:' + item.$el.clientHeight);
                     let height = item.$el.clientHeight;
                     //item.itemHeight
                     this.adjustList(minHeightList, height);
