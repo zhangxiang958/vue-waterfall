@@ -18,6 +18,45 @@ Because this component must use the feature of vue -- scope slot, so
   ```
     import { WaterFall, Unit } from './vue-waterfall';
 
+    data() {
+            return {
+                page: 3,
+                perpage: 2,
+                items: [
+                    {
+                        name: 'hah',
+                        imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg',
+                        imgHeight: '422*563'
+                    },
+                    {
+                        name: 'test2',
+                        imgURL: 'http://im5.tongbu.com/tbnews/201604/5ba60557-2.gif?w=500,281&b=559',
+                        imgHeight: '500*281'                                                
+                    },
+                    {
+                        name: 'test3',
+                        imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
+                        imgHeight: '2500*1797'                        
+                    },
+                    {
+                        name: 'test4',
+                        imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+                        imgHeight: '1280*720'                        
+                    },
+                    {
+                        name: 'test5',
+                        imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg',
+                        imgHeight: '650*649'                        
+                    },
+                    {
+                        name: 'test4',
+                        imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
+                        imgHeight: '1280*720'                        
+                    },
+                ]
+            }
+        }
+    
     <WaterFall>
         <template scope="scope">
             <Unit v-for="(item,index) in items" :key="index">
@@ -31,6 +70,16 @@ Because this component must use the feature of vue -- scope slot, so
     </WaterFall>
   ```
 
+# Options
+
+Here list Props on waterfall component
+
+| Option | Description |
+| ----- | ----- |
+| Gap_Width | the width of column width |
+| Column_Width | the width of column, but in mobile, this property is invaild, it will be counted equal to the half of screen width |
+| (scope.)width | the width of column, you can take the value to calculate the size of image, but according to the file of vue.js, this value must be used in template which must has named scope  |
+you may need this slot file: https://cn.vuejs.org/v2/guide/components.html#作用域插槽
 ## Demo
 
   see it in https://zhangxiang958.github.io/vue-waterfall/src/index.html
