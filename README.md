@@ -1,6 +1,6 @@
 # vue-waterfall
 
-> make a simple waterfall component for Vuejs
+> make a simple waterfall component for Vuejs(work for project in yy)
 
 ## Requirements
 Because this component must use the feature of vue -- scope slot, so 
@@ -11,21 +11,22 @@ Because this component must use the feature of vue -- scope slot, so
 
 ## Installation
 
-  Download the component(waterfall.vue) and util.js
+  Download the component(index.vue, unit.vue) and util.js in vue-waterfall folder.
 
 ## Usage
 
   ```
-    import WaterFall from './waterfall.vue';
+    import { WaterFall, Unit } from './vue-waterfall';
 
-    <WaterFall 
-        :DATALIST="items"
-    >
-        <template scope="templateName">
-            {{ templateName.width }}
-            {{ templateName.item.name }}
-            <img :src="templateName.item.imgURL" alt="" style="width: 100%;" :height="templateName.item.imgHeight">
-            {{ templateName.index }}
+    <WaterFall>
+        <template scope="scope">
+            <Unit v-for="(item,index) in items" :key="index">
+                <div class="imgContainer">
+                    <!--<img :src="item.imgURL" alt="" style="width: 100%;" :height="((scope.width - 10) * item.imgHeight.split('*')[1]) / item.imgHeight.split('*')[0]">                        -->
+                    <img :src="item.imgURL" alt="" style="width: 100%;">
+                </div>
+                {{ item.name }}
+            </Unit>
         </template>
     </WaterFall>
   ```
