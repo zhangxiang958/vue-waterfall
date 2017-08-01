@@ -9767,7 +9767,7 @@
 	  /* script */
 	  __webpack_require__(9),
 	  /* template */
-	  __webpack_require__(84),
+	  __webpack_require__(89),
 	  /* styles */
 	  injectStyle,
 	  /* scopeId */
@@ -9775,7 +9775,7 @@
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/app.vue"
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9833,7 +9833,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.app[data-v-449cab76] {\n    margin: 0;\n}\n", ""]);
+	exports.push([module.id, "\n.app[data-v-449cab76] {\n    margin: 0;\n}\n.text[data-v-449cab76] {\n    width: 100%;\n    height: 50px;\n}\n.imgContainer[data-v-449cab76] {\n    width: 100%;\n    overflow: hidden;\n}\n", ""]);
 
 	// exports
 
@@ -10281,9 +10281,13 @@
 	    value: true
 	});
 
-	var _waterfall = __webpack_require__(10);
+	var _index = __webpack_require__(10);
 
-	var _waterfall2 = _interopRequireDefault(_waterfall);
+	var _index2 = _interopRequireDefault(_index);
+
+	var _unit = __webpack_require__(84);
+
+	var _unit2 = _interopRequireDefault(_unit);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10304,27 +10308,27 @@
 	            items: [{
 	                name: 'hah',
 	                imgURL: 'http://p2.qhimg.com/t01f3bb4410996dc19d.jpg',
-	                imgHeight: 200
+	                imgHeight: '422*563'
 	            }, {
 	                name: 'test2',
 	                imgURL: 'http://im5.tongbu.com/tbnews/201604/5ba60557-2.gif?w=500,281&b=559',
-	                imgHeight: 230
+	                imgHeight: '500*281'
 	            }, {
 	                name: 'test3',
 	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
-	                imgHeight: 230
+	                imgHeight: '2500*1797'
 	            }, {
 	                name: 'test4',
 	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
-	                imgHeight: 180
+	                imgHeight: '1280*720'
 	            }, {
 	                name: 'test5',
 	                imgURL: 'http://img.sc115.com/uploads/sc/jpgs/0519apic3677_sc115.com.jpg',
-	                imgHeight: 300
+	                imgHeight: '650*649'
 	            }, {
 	                name: 'test4',
 	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
-	                imgHeight: 180
+	                imgHeight: '1280*720'
 	            }]
 	        };
 	    },
@@ -10335,18 +10339,18 @@
 	            this.items.push({
 	                name: 'test3',
 	                imgURL: 'http://upload.shunwang.com/2013/0906/1378432550743.jpg',
-	                imgHeight: 230
+	                imgHeight: '2500*1797'
 	            }, {
 	                name: 'test4',
 	                imgURL: 'http://bbsdown10.cnmo.com/attachments/201111/02/222208zmss9ysqselye98j.jpg',
-	                imgHeight: 180
+	                imgHeight: '1280*720'
 	            });
 	            this.page++;
 	            // console.log(this.items);
 	        }
 	    },
 	    components: {
-	        WaterFall: _waterfall2.default
+	        WaterFall: _index2.default, Unit: _unit2.default
 	    }
 	};
 
@@ -10367,13 +10371,13 @@
 	  /* styles */
 	  injectStyle,
 	  /* scopeId */
-	  "data-v-cdf86094",
+	  "data-v-7094c8f2",
 	  /* moduleIdentifier (server only) */
 	  null
 	)
-	Component.options.__file = "/media/jarvis/57ede06b-4ff7-4c56-bdc0-20fb50da7e49/jarvis/Workspace/vue-waterfall/src/components/waterfall.vue"
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\vue-waterfall\\index.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-	if (Component.options.functional) {console.error("[vue-loader] waterfall.vue: functional components are not supported with templates, they should use render functions.")}
+	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 	/* hot reload */
 	if (false) {(function () {
@@ -10382,9 +10386,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-cdf86094", Component.options)
+	    hotAPI.createRecord("data-v-7094c8f2", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-cdf86094", Component.options)
+	    hotAPI.reload("data-v-7094c8f2", Component.options)
 	  }
 	  module.hot.dispose(function (data) {
 	    disposed = true
@@ -10405,13 +10409,13 @@
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	if(content.locals) module.exports = content.locals;
 	// add the styles to the DOM
-	var update = __webpack_require__(6)("c707a1a4", content, false);
+	var update = __webpack_require__(6)("5aa02e62", content, false);
 	// Hot Module Replacement
 	if(false) {
 	 // When the styles change, update the <style> tags
 	 if(!content.locals) {
-	   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cdf86094\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./waterfall.vue", function() {
-	     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cdf86094\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./waterfall.vue");
+	   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7094c8f2\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+	     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7094c8f2\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
 	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 	     update(newContent);
 	   });
@@ -10429,7 +10433,7 @@
 
 
 	// module
-	exports.push([module.id, "\n#waterfall[data-v-cdf86094] {\n    width: 100%;\n    overflow-x: hidden;\n}\n.waterfall-container[data-v-cdf86094] {\n    position: relative;\n    margin: 0 auto;\n    overflow: hidden;\n    zoom: 1;\n}\n.waterfall-unit[data-v-cdf86094] {\n    position: absolute;\n}\n.cellready[data-v-cdf86094] {\n    display: none;\n}\n", ""]);
+	exports.push([module.id, "\n.waterfall[data-v-7094c8f2] {\n    position: relative;\n    margin: 0 auto;\n    width: 100%;\n    overflow-x: hidden;\n}\n", ""]);
 
 	// exports
 
@@ -10444,186 +10448,152 @@
 	    value: true
 	});
 
-	var _util = __webpack_require__(14);
+	var _Util = __webpack_require__(14);
 
-	var _util2 = _interopRequireDefault(_util);
+	var _Util2 = _interopRequireDefault(_Util);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	    props: {
-	        MIN_COLUMN: {
+	        Gap_Width: {
 	            type: Number,
-	            default: 2,
-	            validator: function validator(value) {
-	                return value >= 2;
-	            }
+	            default: 5
 	        },
-	        GAP_WIDTH: {
+	        Column_Width: {
 	            type: Number,
-	            default: 5,
-	            validator: function validator(value) {
-	                return value >= 0;
-	            }
-	        },
-	        GAP_HEIGHT: {
-	            type: Number,
-	            default: 15,
-	            validator: function validator(value) {
-	                return value >= 0;
-	            }
-	        },
-	        COLWIDTH: {
-	            type: Number,
-	            default: 180,
-	            validator: function validator(value) {
-	                return value >= 0;
-	            }
-	        },
-	        DATALIST: {
-	            type: Array,
-	            default: function _default() {
-	                return [];
-	            }
-	        },
-	        PAGE: {
-	            type: Number
-	        },
-	        PERPAGE: {
-	            type: Number
-	        }
-	    },
-	    watch: {
-	        DATALIST: function DATALIST(newVal) {
-	            var _this = this;
-
-	            this.$nextTick(function () {
-
-	                var cells = _this.$el.querySelector('.cellready');
-	                // console.log(cells);
-	                cells.length ? cells = Array.prototype.slice.call(cells, 0) : cells = [cells];
-
-	                _this.adjustCells(cells);
-	            });
+	            default: 224
 	        }
 	    },
 	    data: function data() {
 	        return {
-	            columnTop: [],
-	            col_width: this.COLWIDTH,
-	            waterfallWrapper: null,
-	            colContainer: null
+	            unitList: [],
+	            lastUnitLength: 0,
+	            containerWidth: 0,
+	            column: [],
+	            columnCount: 0,
+	            columnWidth: this.Column_Width,
+	            columnGap: this.Gap_Width
 	        };
 	    },
-	    created: function created() {
-	        console.log('water created');
+
+	    watch: {
+	        unitList: function unitList(val) {
+	            // console.log('val length:' + val.length);
+	            // console.log(oldVal.length);
+	            // console.log('lastlength: ' + this.lastUnitLength);
+	            var list = val.slice(this.lastUnitLength);
+	            this.layout(list);
+	            this.lastUnitLength = val.length;
+	        }
 	    },
 	    mounted: function mounted() {
-	        var _this2 = this;
+	        var _this = this;
 
-	        console.log('water mounted');
+	        this.unitList = this.$children;
 	        this.init();
-	        window.addEventListener('resize', function () {
-
-	            _this2.$nextTick(function () {
-	                _this2.init();
-	            });
-	        });
+	        window.onresize = function () {
+	            _this.init();
+	            _this.layout(_this.unitList);
+	        };
 	    },
 
 	    methods: {
 	        init: function init() {
-	            /** get the container and save */
-	            this.waterfallWrapper = document.querySelector("#waterfall");
-	            this.colContainer = document.querySelector('#waterfall-container');
-	            /** caculate the col amount */
-	            var colAmount = this.getColAmount();
-	            /** according to colAmount to setup the array which remember the height of every col */
-	            this.markColumnTop(colAmount);
-	            /** adjust the cells */
-	            this.manageCell();
+	            // console.log('screen:' + window.screen.width);
+	            var waterfallContainer = document.querySelector('.waterfall');
+	            this.containerWidth = waterfallContainer.getBoundingClientRect().width;
+	            // console.log('container width:' + this.containerWidth);
+	            //使用这个宽度做判断
+	            //小于 768 的是手机固定两列(单元格动态计算，减去各种间隔后的一半) ，大于 768 的是 ipad ，ipad pro 与 pc 端(固定单元格是 224 px， 然后计算可以容纳多少列)
+	            // console.log(this.getColumnCount(this.containerWidth));
+	            //初始化有多少列
+	            this.columnCount = this.getColumnCount(this.containerWidth);
+	            //初始化列宽
+	            this.initColumnWidth(this.columnCount);
+	            //记录每一列的高度
+	            this.initColumnTop(this.columnCount);
+	            // console.log(this.column);
+	            //设置单元格宽度
+	            // this.layout(this.unitList);
 	        },
-	        getColAmount: function getColAmount() {
-	            var body = document.body;
-	            var bodyWidth = body.offsetWidth;
-	            console.log(bodyWidth);
-	            var GapWidth = this.GAP_WIDTH;
-	            var colWidth = this.COLWIDTH;
-
-	            console.log(Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth))));
-	            console.log(Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
-	            return Math.max(this.MIN_COLUMN, Math.floor((bodyWidth + GapWidth) / (colWidth + GapWidth)));
-	        },
-	        markColumnTop: function markColumnTop(colAmount) {
-
-	            //set a array for every column to mark the top, so we can know which column's height is smallest
-	            this.columnTop = [];
-	            for (var i = 0; i < colAmount; i++) {
-
-	                this.columnTop.push(0);
-	            }
-
-	            //init the comtainer width
-	            var wrapperWidth = document.body.offsetWidth;
-	            var colContainerWidth = colAmount * (this.COLWIDTH + this.GAP_WIDTH) - this.GAP_WIDTH;
-	            console.log(colContainerWidth);
-	            this.waterfallWrapper.style.cssText = 'width: ' + wrapperWidth + 'px;';
-	            if (wrapperWidth >= colContainerWidth) {
-
-	                this.colContainer.style.cssText = 'width: ' + colContainerWidth + 'px;';
+	        getColumnCount: function getColumnCount(width) {
+	            // width < 768
+	            if (_Util2.default.isMobile()) {
+	                return 2;
 	            } else {
-
-	                this.col_width = Math.floor((wrapperWidth - this.GAP_WIDTH * (colAmount - 1)) / colAmount);
-	                console.log(this.col_width);
-	                var _colContainerWidth = colAmount * (this.col_width + this.GAP_WIDTH) - this.GAP_WIDTH;
-	                console.log(_colContainerWidth);
-	                this.colContainer.style.cssText = 'width: ' + _colContainerWidth + 'px;';
+	                return Math.floor((width + this.columnGap) / (this.columnWidth + this.columnGap));
 	            }
 	        },
-	        manageCell: function manageCell() {
-
-	            var minColHeight = _util2.default.getMinVal(this.columnTop);
-	            console.log(minColHeight);
-	            var children = Array.prototype.slice.call(this.colContainer.children);
-	            this.adjustCells(children);
-	        },
-	        adjustCells: function adjustCells(units) {
-	            var _this3 = this;
-
-	            var columnTop = this.columnTop;
-	            var colWidth = void 0;
-	            if (this.col_width === this.COLWIDTH) {
-
-	                colWidth = this.COLWIDTH;
-	            } else {
-	                console.warn('已根据屏幕宽度适配单元格宽度.');
-	                colWidth = this.col_width;
+	        initColumnTop: function initColumnTop(columnCount) {
+	            var columnWidth = this.columnWidth;
+	            for (var i = 0; i < columnCount; i++) {
+	                this.column[i] = {
+	                    left: columnWidth * i,
+	                    top: 0,
+	                    count: 0
+	                };
 	            }
+	            this.setContainerBox(this.column.length, this.columnWidth, 0);
+	        },
+	        initColumnWidth: function initColumnWidth(columnCount) {
+	            if (columnCount === 2) {
+	                this.columnWidth = (this.containerWidth - this.columnGap) / 2;
+	            }
+	            return this.columnWidth;
+	        },
+	        layout: function layout(unitList) {
+	            var _this2 = this;
 
-	            // console.log(units);
-	            units.forEach(function (unit, i) {
-
-	                var colInfo = _util2.default.getMinVal(columnTop),
-	                    colMinIndex = colInfo.index,
-	                    colMinHeight = colInfo.minHeight;
-
-	                var height = unit.offsetHeight,
-	                    left = colMinIndex * (colWidth + _this3.GAP_WIDTH),
-	                    top = colMinHeight === 0 ? colMinHeight : colMinHeight + _this3.GAP_HEIGHT;
-
-	                unit.style.cssText = 'width: ' + colWidth + 'px;\n                                    left: ' + left + 'px;\n                                    top: ' + top + 'px';
-
-	                unit.className = unit.className.replace(/\bcellready\b/, '');
-	                columnTop[colMinIndex] = colMinHeight === 0 ? colMinHeight + unit.offsetHeight : colMinHeight + unit.offsetHeight + _this3.GAP_HEIGHT;
-	                // console.log(columnTop);
+	            unitList.forEach(function (item, index) {
+	                // console.log(item.itemHeight);
+	                var minHeightList = _this2.getMinHeightList();
+	                _this2.adjustCell(item.$el, _this2.columnWidth, minHeightList.left, minHeightList.top);
+	                // console.log('clientHeight:' + item.$el.clientHeight);
+	                var height = item.$el.clientHeight;
+	                //item.itemHeight
+	                _this2.adjustList(minHeightList, height);
+	                _this2.setContainerBox(_this2.column.length, _this2.columnWidth, minHeightList.top);
 	            });
-
-	            var maxHeightVal = _util2.default.getMaxVal(columnTop).maxHeight;
-	            this.waterfallWrapper.style.cssText += 'height: ' + maxHeightVal + 'px;';
-	            this.colContainer.style.cssText += 'height: ' + maxHeightVal + 'px;';
+	        },
+	        adjustList: function adjustList(list, height) {
+	            list.top += height;
+	            list.count++;
+	        },
+	        adjustCell: function adjustCell(item, width, left, top) {
+	            item.style.cssText += '; width: ' + width + 'px; left: ' + left + 'px; top: ' + top + 'px;';
+	        },
+	        getMinHeightList: function getMinHeightList() {
+	            var list = this.column.slice(0);
+	            list = list.sort(function (prev, next) {
+	                return prev.top - next.top;
+	            });
+	            return list[0];
+	        },
+	        setContainerBox: function setContainerBox(count, width, height) {
+	            document.querySelector('.waterfall').style.cssText += '; width: ' + count * width + 'px; height: ' + height + 'px;';
 	        }
 	    }
 	};
+	/**
+	 * http://cued.xunlei.com/log031
+	 * todo:
+	 * 1. 不可能使用 imagesLoaded 然后再使用布局，我的想法是用户的网络加载可能图片加载比较慢，但是不应该妨碍用户观看其他数据，如果数据库不返回宽高，会导致页面性能非常差， 结合自己的业务
+	 * 可以发现都会返回图片的 dpi，所以一定要提供宽高值，接下来就是需要考虑怎么传这个宽高值比较优雅，如果不需要知道宽高就可以达到瀑布流是最好的。
+	 * 2. 绝对定位的方式不仅复杂，而且性能比较差
+	 * 3.列表插入的方式简单，性能好，问题就在于怎么在 vue 中实现
+	*/
+	/**
+	 * 1. 想做一个响应式的瀑布流，目前都需要定死一个宽度，根据这个宽度计算屏幕可以容纳多少个列
+	 * 2. 既然发现上面这一点无法避免，那就换个思路，只要我的用户体验好就没问题
+	 * 发现堆糖网上，移动端单元宽度是 style 动态写的，而 pc 端是定死的 224 px，我猜测他们是手机端都是固定两列，动态计算宽度，然后电脑端（包括 ipad，ipad pro， PC 是 CSS 样式固定的宽度）
+	 * 然后也发现花瓣网上的也是类似的（花瓣居然不兼容 ipad 尺寸，估计 min-width = 768 了），ipad 上是 236， 堆糖是 224，发现这两个网站都没有用 flexible 布局，和自己的业务需求有点不符合
+	 * 可以根据屏幕宽度，如果小于等于 768 px，那么就认为是手机，大于的就认为是 PC 端，手机端固定为两列
+	 * 对于自己的业务来说，因为使用了 flexible 布局，页面宽度一定会是 10 rem 的,这个可以通过 getBoundingClientRect 来获取宽度
+	 * 3. 自己之前做的那个虽然也是用列表包裹起来， 但是还是需要计算位置， 在想能不能用 css 搞定定位问题, 原本想用 inline-block 加上 text-align:justify 自适应布局的，但是 vue 列表循环的
+	 *  代码 <span></span><span> 之间没有空格，所以不能使用这个方案
+	 * 4. 对于 unit 传入的高度我觉得应该是单元格的高度，不然复杂度太高，而且作为一个组件不应该知道里面的内容是什么，而且也没办法知道用户到底想设置那个块的内容高度
+	*/
 
 /***/ }),
 /* 14 */
@@ -10637,6 +10607,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	/* eslint-disable */
 	(function (root, factory) {
 
 	  if (true) {
@@ -10652,58 +10623,26 @@
 	})(undefined, function () {
 	  'use strict';
 
-	  var win = window,
-	      _offset = 0;
+	  var ua = navigator.userAgent;
 	  var Util = {
-	    getMinVal: function getMinVal(list) {
-
-	      if (Object.prototype.toString.call(list) !== '[object Array]') {
-	        console.error('list is not a array');
-	      } else {
-
-	        var min = list[0],
-	            index = 0;
-
-	        list.forEach(function (data, i) {
-
-	          if (data < min) {
-	            min = data;
-	            index = i;
-	          }
-	        });
-
-	        return {
-	          minHeight: min,
-	          index: index
-	        };
-	      }
-
-	      return null;
+	    isMobile: function isMobile() {
+	      return this.isiPhone() || this.isAndroid() || isBlackberry();
 	    },
-	    getMaxVal: function getMaxVal(list) {
-
-	      if (Object.prototype.toString.call(list) !== '[object Array]') {
-	        console.error('list is not a array');
-	      } else {
-
-	        var max = list[0],
-	            index = 0;
-
-	        list.forEach(function (data, i) {
-
-	          if (data > max) {
-	            max = data;
-	            index = i;
-	          }
-	        });
-
-	        return {
-	          maxHeight: max,
-	          index: index
-	        };
-	      }
-
-	      return null;
+	    isiPhone: function isiPhone() {
+	      return (/iphone/i.test(ua)
+	      );
+	    },
+	    isiPad: function isiPad() {
+	      return (/ipad/i.test(ua)
+	      );
+	    },
+	    isAndroid: function isAndroid() {
+	      return (/android/i.test(ua)
+	      );
+	    },
+	    isBlackberry: function isBlackberry() {
+	      return (/blackberry/i.test(userAgent) || /BB10/i.test(userAgent)
+	      );
 	    }
 	  };
 
@@ -11998,34 +11937,17 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('section', {
-	    attrs: {
-	      "id": "waterfall"
-	    }
-	  }, [_c('section', {
-	    staticClass: "waterfall-container",
-	    attrs: {
-	      "id": "waterfall-container"
-	    }
-	  }, _vm._l((_vm.DATALIST), function(item, index) {
-	    return _c('div', {
-	      key: item,
-	      staticClass: "waterfall-unit cellready",
-	      attrs: {
-	        "index": index
-	      }
-	    }, [_vm._t("default", [_vm._v("\n                loading.....\n            ")], {
-	      item: item,
-	      index: index,
-	      width: _vm.col_width
-	    })], 2)
-	  }))])
+	  return _c('div', {
+	    staticClass: "waterfall"
+	  }, [_vm._t("default", null, {
+	    width: _vm.columnWidth
+	  })], 2)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-cdf86094", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-7094c8f2", module.exports)
 	  }
 	}
 
@@ -12033,28 +11955,143 @@
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var disposed = false
+	function injectStyle (ssrContext) {
+	  if (disposed) return
+	  __webpack_require__(85)
+	}
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(87),
+	  /* template */
+	  __webpack_require__(88),
+	  /* styles */
+	  injectStyle,
+	  /* scopeId */
+	  "data-v-6b3adad8",
+	  /* moduleIdentifier (server only) */
+	  null
+	)
+	Component.options.__file = "E:\\side project\\vue-waterfall\\src\\components\\vue-waterfall\\unit.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] unit.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-6b3adad8", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-6b3adad8", Component.options)
+	  }
+	  module.hot.dispose(function (data) {
+	    disposed = true
+	  })
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(86);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(6)("0927a032", content, false);
+	// Hot Module Replacement
+	if(false) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b3adad8\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./unit.vue", function() {
+	     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b3adad8\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./unit.vue");
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)(undefined);
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.waterfall-unit[data-v-6b3adad8] {\n    position: absolute;\n    box-sizing: border-box;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {};
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "waterfall-unit",
+	    style: ({
+	      padding: ((this.$parent.columnGap) + "px")
+	    })
+	  }, [_vm._t("default", [_vm._v("\n        loading.....\n    ")])], 2)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-6b3adad8", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: "app"
 	  }, [_c('WaterFall', {
-	    attrs: {
-	      "DATALIST": _vm.items,
-	      "PAGE": _vm.page,
-	      "PERPAGE": _vm.perpage
-	    },
 	    scopedSlots: _vm._u([{
 	      key: "default",
-	      fn: function(waterfallItem) {
-	        return [_vm._v("\n            " + _vm._s(waterfallItem.width) + "\n            " + _vm._s(waterfallItem.item.name) + "\n            "), _c('img', {
-	          staticStyle: {
-	            "width": "100%"
-	          },
-	          attrs: {
-	            "src": waterfallItem.item.imgURL,
-	            "alt": "",
-	            "height": waterfallItem.item.imgHeight
-	          }
-	        }), _vm._v("\n            " + _vm._s(waterfallItem.index) + "\n        ")]
+	      fn: function(scope) {
+	        return _vm._l((_vm.items), function(item, index) {
+	          return _c('Unit', {
+	            key: index
+	          }, [_c('div', {
+	            staticClass: "imgContainer"
+	          }, [_c('img', {
+	            staticStyle: {
+	              "width": "100%"
+	            },
+	            attrs: {
+	              "src": item.imgURL,
+	              "alt": ""
+	            }
+	          })]), _vm._v("\n                " + _vm._s(item.name) + "\n            ")])
+	        })
 	      }
 	    }])
 	  })], 1)

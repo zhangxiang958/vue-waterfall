@@ -18,7 +18,7 @@
      *  代码 <span></span><span> 之间没有空格，所以不能使用这个方案
      * 4. 对于 unit 传入的高度我觉得应该是单元格的高度，不然复杂度太高，而且作为一个组件不应该知道里面的内容是什么，而且也没办法知道用户到底想设置那个块的内容高度
     */
-    import Util from './vue-waterUtil.js';
+    import Util from './Util.js';
 
     export default {
         props: {
@@ -44,9 +44,9 @@
         },
         watch: {
             unitList: function(val){
-                console.log('val length:' + val.length);
+                // console.log('val length:' + val.length);
                 // console.log(oldVal.length);
-                console.log('lastlength: ' + this.lastUnitLength);
+                // console.log('lastlength: ' + this.lastUnitLength);
                 let list = val.slice(this.lastUnitLength);
                 this.layout(list);
                 this.lastUnitLength = val.length;
@@ -55,23 +55,27 @@
         mounted() {
             this.unitList = this.$children;
             this.init();
+            window.onresize = () => {
+                this.init();
+                this.layout(this.unitList);
+            }
         },
         methods: {
             init() {
-                console.log('screen:' + window.screen.width);
+                // console.log('screen:' + window.screen.width);
                 var waterfallContainer = document.querySelector('.waterfall');
                 this.containerWidth = waterfallContainer.getBoundingClientRect().width;
-                console.log('container width:' + this.containerWidth);
+                // console.log('container width:' + this.containerWidth);
                 //使用这个宽度做判断
                 //小于 768 的是手机固定两列(单元格动态计算，减去各种间隔后的一半) ，大于 768 的是 ipad ，ipad pro 与 pc 端(固定单元格是 224 px， 然后计算可以容纳多少列)
-                console.log(this.getColumnCount(this.containerWidth));
+                // console.log(this.getColumnCount(this.containerWidth));
                 //初始化有多少列
                 this.columnCount = this.getColumnCount(this.containerWidth);
                 //初始化列宽
                 this.initColumnWidth(this.columnCount);
                 //记录每一列的高度
                 this.initColumnTop(this.columnCount);
-                console.log(this.column);
+                // console.log(this.column);
                 //设置单元格宽度
                 // this.layout(this.unitList);
             },

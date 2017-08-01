@@ -1,11 +1,6 @@
 <script>
     export default {
-        props: {
-            itemHeight: {
-                type: Number,
-                required: true
-            }
-        }
+
     }
 </script>
 

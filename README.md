@@ -57,7 +57,6 @@ Because this component must use the feature of vue -- scope slot, so
   * 对于自己的业务来说，因为使用了 flexible 布局，页面宽度一定会是 10 rem 的,这个可以通过 getBoundingClientRect 来获取宽度
   * 3. 自己之前做的那个虽然也是用列表包裹起来， 但是还是需要计算位置， 在想能不能用 css 搞定定位问题, 原本想用 inline-block 加上 text-align:justify 自适应布局的，但是 vue 列表循环的
   *  代码 <span></span><span> 之间没有空格，所以不能使用这个方案
-  * 4. 对于 unit 传入的高度我觉得应该是单元格的高度，不然复杂度太高，而且作为一个组件不应该知道里面的内容是什么，而且也没办法知道用户到底想设置那个块的内容高度
 */
 #### contact：
 - 个人Blog [Jarvis](http://zhangxiang958.github.io/)
