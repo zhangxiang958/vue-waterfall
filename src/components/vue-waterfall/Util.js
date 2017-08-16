@@ -17,7 +17,7 @@
   var ua = navigator.userAgent;
   var Util = {
     isMobile: function(){
-        return this.isiPhone() || this.isAndroid() || isBlackberry();
+        return this.isiPhone() || this.isAndroid() || this.isBlackberry();
     },
     isiPhone: function(){
         return /iphone/i.test(ua);
@@ -29,7 +29,7 @@
          return /android/i.test(ua);
     },
     isBlackberry: function(){
-        return /blackberry/i.test(userAgent) || /BB10/i.test(userAgent);
+        return /blackberry/i.test(ua) || /BB10/i.test(ua);
     },
   }
 
